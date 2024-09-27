@@ -34,12 +34,20 @@ const Formulario = () => {
       data.termsAccepted = "No";
     }
 
+    let star = "";
+    if(data.rating == 1){
+      star = "estrella";
+    }else{
+      star = "estrellas";
+    }
+
+
     alert("Nombre: " + data.name + "."
       + "\nApellidos: " + data.surname + "."
       + "\nEdad: " + data.age + "." 
       + "\nGenero: " + data.gender + "."
       + "\nLenguaje: " + data.language + "."
-      + "\nRating: " + data.rating + " Estrellas."
+      + "\nRating: " + data.rating  + " " + star + "."
       + "\nTerminos aceptados: " + data.termsAccepted + "."
     );
   };
@@ -106,9 +114,9 @@ const Formulario = () => {
             onChange={handleChange}
             row
           >
-            <FormControlLabel value="male" control={<Radio />} label="Masculino" />
-            <FormControlLabel value="female" control={<Radio />} label="Femenino" />
-            <FormControlLabel value="other" control={<Radio />} label="Otro" />
+            <FormControlLabel value="Masculino" control={<Radio />} label="Masculino" />
+            <FormControlLabel value="Femenino" control={<Radio />} label="Femenino" />
+            <FormControlLabel value="Otro" control={<Radio />} label="Otro" />
           </RadioGroup>
         </Grid>
 
