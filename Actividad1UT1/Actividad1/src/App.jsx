@@ -41,6 +41,9 @@ const Formulario = () => {
       star = "estrellas";
     }
 
+    if(data.rating == null) {
+      data.rating = 0;
+    }
 
     alert("Nombre: " + data.name + "."
       + "\nApellidos: " + data.surname + "."
