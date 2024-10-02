@@ -1,9 +1,18 @@
 import React, { useState } from 'react';
 import {TextField, Button, Radio, RadioGroup, FormControlLabel, FormLabel, Checkbox, Select, MenuItem, Rating, Typography } from '@mui/material';
 import Grid from '@mui/material/Grid2';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 
 const Formulario = () => {
-
+  const [open, setOpen] = React.useState(false);
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
   // Definir el estado inicial del formulario
   const [data, setData] = useState({
     name: '',
@@ -23,37 +32,16 @@ const Formulario = () => {
       [name]: type === 'checkbox' ? checked : value,
     });
   };
+  //Manejar dialogo.
+  const handleClose = () => {
+    setOpen(false);
+  };
 
-  // Manejar el envío del formulario
+
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if(data.termsAccepted === true){
-      data.termsAccepted = "Si";
-    }else{
-      data.termsAccepted = "No";
-    }
-
-    let star = "";
-    if(data.rating == 1){
-      star = "estrella";
-    }else{
-      star = "estrellas";
-    }
-
-    if(data.rating == null) {
-      data.rating = 0;
-    }
-
-    alert("Nombre: " + data.name + "."
-      + "\nApellidos: " + data.surname + "."
-      + "\nEdad: " + data.age + "." 
-      + "\nGenero: " + data.gender + "."
-      + "\nLenguaje: " + data.language + "."
-      + "\nRating: " + data.rating  + " " + star + "."
-      + "\nTerminos aceptados: " + data.termsAccepted + "."
-    );
-  };
+    setOpen(true);
+  }
 
   // Manejar la limpieza del formulario
   const handleClear = () => {
@@ -66,6 +54,12 @@ const Formulario = () => {
       rating: 0,
       termsAccepted: false,
     });
+  };
+
+  const isTermsAccepted = () => {
+    return (
+      data.termsAccepted
+    );
   };
 
   return (
@@ -117,15 +111,15 @@ const Formulario = () => {
             onChange={handleChange}
             row
           >
-            <FormControlLabel value="Masculino" control={<Radio />} label="Masculino" />
-            <FormControlLabel value="Femenino" control={<Radio />} label="Femenino" />
-            <FormControlLabel value="Otro" control={<Radio />} label="Otro" />
+            <FormControlLabel required value="Masculino" control={<Radio />} label="Masculino" />
+            <FormControlLabel required value="Femenino" control={<Radio />} label="Femenino" />
+            <FormControlLabel required value="Otro" control={<Radio />} label="Otro" />
           </RadioGroup>
         </Grid>
 
         {/* Lenguaje de Programación Favorito (Select) */}
         <Grid item size={{ xs: 6, sm: 6}}>
-          <FormLabel>Lenguaje de Programación Favorito</FormLabel>
+          <FormLabel component="legend">Lenguaje de Programación Favorito</FormLabel>
           <Select
             name="language"
             value={data.language}
@@ -165,7 +159,7 @@ const Formulario = () => {
 
         {/* Botones */}
         <Grid item size={6}>
-          <Button type="submit" variant="contained" color="primary" fullWidth>
+          <Button type="submit" variant="contained" color="primary" fullWidth disabled={!isTermsAccepted()}>
             Enviar
           </Button>
         </Grid>
@@ -174,7 +168,31 @@ const Formulario = () => {
             Limpiar
           </Button>
         </Grid>
-      </Grid>
+
+         <Dialog
+        fullScreen={fullScreen}
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="responsive-dialog-title"
+      >
+        <DialogTitle id="responsive-dialog-title">
+          {"Use Google's location service?"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+          
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button autoFocus onClick={handleClose}>
+            No
+          </Button>
+          <Button onClick={handleClose} autoFocus>
+            Si
+          </Button>
+        </DialogActions>
+      </Dialog>
+      </Grid> 
     </form>
   );
 };
