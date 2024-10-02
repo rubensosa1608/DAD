@@ -176,11 +176,11 @@ const Formulario = () => {
         aria-labelledby="responsive-dialog-title"
       >
         <DialogTitle id="responsive-dialog-title">
-          {"Use Google's location service?"}
+          {"Confirmación"}
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
-          
+          {"¿Estás seguro de mandar la encuesta?"}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
