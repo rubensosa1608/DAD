@@ -3,6 +3,7 @@ import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+import { CustomButton } from 'milibreria';
 
 function Ficha({animal, atribute, imageUrl, imageSize, description}) {
   const [count, setCount] = useState(0)
@@ -55,7 +56,15 @@ function Ficha({animal, atribute, imageUrl, imageSize, description}) {
         <Avatar src={imageUrl} sx={{ width: imageSize, height: imageSize }} />
         <Typography variant="h4" component="h2">Hola, soy yo, {animal}. y soy {atribute}:</Typography>
         <Typography variant="h6" component="h2">{description}</Typography>
-        <Button sx={{marginTop: 5}} variant='contained' onClick={() => setCount(count + 1)} size="large" color="secondary">Me has hecho: {count} rascaditas</Button>
+        <CustomButton
+        text={`Me has hecho: ${count} rascaditas`}
+        txtcolor="black"
+        bgcolor="secondary"
+        disabled={false}
+        size="large"
+        onClick={() => setCount(count + 1)}
+        sx={{ marginTop: 5 }}
+      />
       </Stack>
 
       
