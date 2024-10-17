@@ -1,1 +1,0 @@
-Rubén Sosa Ramos
