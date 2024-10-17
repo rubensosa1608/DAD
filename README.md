@@ -1,3 +1,0 @@
-# DAD
-
-#Rubén Sosa Ramos.
