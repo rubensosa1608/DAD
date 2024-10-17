@@ -1,37 +1,50 @@
 import React, { useState } from 'react';
 import { Card, CardContent, Typography, CardMedia, IconButton } from '@mui/material';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import myFavouriteBorder from 'milibreria';
-import myFavourite from 'milibreria';
-import myButton from 'milibreria';
-import rubenSR from 'milibreria';
+import { RubenSR, MyButton, MyFavourite, MyFavouriteBorder } from 'milibreria';
 
-const Testimonio = ({ nombre, imagen, alt, testimonio, puesto }) => {
-    const [meGusta, setMeGusta] = useState(false);
+//import {myButton} from 'milibreria';
 
-    const manejarMeGusta = () => {
-        setMeGusta(!meGusta);
+const Testimonio = ({ nombre, imagen, testimonio, puesto, width, height, bgColor }) => {
+    const [liked, setLiked] = useState(false);
+    const [count, setCount] = useState(0);
+
+    const handleToggle = () => {
+        setLiked(!liked);
     };
 
     return (
-        <Card sx={{ maxWidth: 400, height: 360, margin: 1, boxShadow: 5 }}>
-
-            <rubenSR 
-            description={testimonio}
+        <Card sx={{ maxWidth: 600, height: 430, margin: 1, boxShadow: 5 }}>
+            <RubenSR  
+                description={testimonio}
+                position={puesto}
+                author={nombre}
+                avatarUrl={imagen}
+                width={width}
+                height={height}
+                bgColor={bgColor}
             />
             <CardContent>
-                <IconButton onClick={manejarMeGusta}>
-                    {meGusta ? <FavoriteIcon color="error" /> : <FavoriteBorderIcon />}
+                <MyButton
+                    text={`Has clickado ${count} veces`} // Usar llaves para texto dinámico
+                    textColor={"lightskyblue"}
+                    bgColor={"white"}
+                    borderColor={"black"}
+                    borderWidth={2}
+                    size={"large"}
+                    hoverTxtColor={"white"}
+                    hoverBgColor={"lightskyblue"}
+                    onClick={() => setCount(count + 1)}
+                />
+
+                <IconButton onClick={handleToggle}>
+                    {liked ? (
+                        <MyFavourite color="error" />
+                    ) : (
+                        <MyFavouriteBorder color="error" />
+                    )}
                 </IconButton>
-
-
-                <myButton />
             </CardContent>
-
-
         </Card>
-
     );
 };
 

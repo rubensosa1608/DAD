@@ -49,8 +49,10 @@ const App = () => {
                       nombre={t.nombre}
                       testimonio={t.testimonio}
                       imagen={t.imagen}
-                      alt={t.alt}
+                      width={300}
+                      height={300}
                       puesto={t.puesto}
+                      bgColor="darkgrey"
                   />
               </Grid>
           ))}
