@@ -25,7 +25,7 @@ const Testimonio = ({ nombre, imagen, testimonio, puesto, width, height, bgColor
             />
             <CardContent>
                 <MyButton
-                    text={`Has clickado ${count} veces`} // Usar llaves para texto dinámico
+                    text={`Has clickado ${count} veces`} 
                     textColor={"lightskyblue"}
                     bgColor={"white"}
                     borderColor={"black"}
